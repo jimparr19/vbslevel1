@@ -1,5 +1,4 @@
 dash==1.18.1
 dash-bootstrap-components==0.11.1
-fitparse==1.2.0
 gunicorn==20.0.4
 pypbl==0.3.0
