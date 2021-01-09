@@ -54,7 +54,7 @@ def get_recommendation_layout(tasted_table, table, weights_table):
         ),
         dbc.Row(
             children=[
-                html.P('Weights:'),
+                html.P('Preference weights:'),
                 dbc.Col(
                     dash_table.DataTable(
                         id='weight',
