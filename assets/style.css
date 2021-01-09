@@ -1,0 +1,38 @@
+.selection_img {
+    height: 70vh;
+    object-fit: contain;
+    margin: 10px;
+}
+
+.nav_link {
+    color: #000;
+}
+
+.nav_link:hover {
+    color: #dc3545;
+}
+
+.active {
+    color: #000;
+    font-weight: 700;
+}
+
+body {
+    background-color: #feefde;
+}
+
+.splash-jumbotron {
+    background-color: #feefde;
+}
+
+.beer52-btn {
+    background-color: #007943;
+}
+
+.beer52-btn:hover {
+    background-color: #006b3b;
+}
+
+.beer52-btn:active {
+    background-color: #006b3b !important;
+}
