@@ -9,7 +9,7 @@ def get_recommendation_layout(tasted_table, table, weights_table):
     recommendation_layout = [
         dbc.Row(
             children=[
-                html.P('Utility:'),
+                html.P('Personalised ranking of beers available at Beer52:'),
                 dbc.Col(
                     dash_table.DataTable(
                         id='table',
@@ -27,7 +27,7 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                                  {'id': 'sweet', 'name': 'sweet', 'type': 'numeric'},
                                  {'id': 'smooth', 'name': 'smooth', 'type': 'numeric'},
                                  {'id': 'bitter', 'name': 'bitter', 'type': 'numeric'},
-                                 {'id': 'buy', 'name': 'beer52', 'type': 'text', 'presentation': 'markdown'}
+                                 {'id': 'buy', 'name': 'Beer52', 'type': 'text', 'presentation': 'markdown'}
                                  ],
                         data=table.to_dict('records'),
                         style_cell_conditional=[
