@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 import dash_bootstrap_components as dbc
 
@@ -27,9 +28,11 @@ server = app.server
 @app.callback(
     Output('page_content', 'children'),
     [Input('url', 'pathname')],
-    [State('hidden_data', 'value'),
-     State('preference_data', 'value')])
-def display_page(pathname, data, preference_data):  # noqa
+    [State('hidden_data', 'children'),
+     State('preference_data', 'children')])
+def display_page(pathname, data_str, preference_data_str):  # noqa
+    data = json.loads(data_str) if data_str else None
+    preference_data = json.loads(preference_data_str) if preference_data_str else None
     if pathname == '/':
         return splash_layout
     elif pathname == '/available':
@@ -125,4 +128,4 @@ def toggle_navbar_collapse(n_clicks, is_open):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)

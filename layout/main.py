@@ -44,12 +44,10 @@ main_layout = html.Div(
             className="mt-4",
         ),
         html.Div(
-            children=[],
             id='hidden_data',
             style={'display': 'none'}
         ),
         html.Div(
-            children=[],
             id='preference_data',
             style={'display': 'none'}
         )
