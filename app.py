@@ -44,7 +44,7 @@ def display_page(pathname, data_str, preference_data_str):  # noqa
         available_beers_df.set_index('beer', inplace=True)
         normalised_available_beers_df = (available_beers_df - beer_features_min) / (
                 beer_features_max - beer_features_min)
-        model = BayesPreference(data=normalised_available_beers_df)
+        model = BayesPreference(data=normalised_available_beers_df, normalise=False)
         model.set_priors([Normal() for _ in features])
         for preference in preference_data['preferences']:
             model.add_strict_preference(beer_df.loc[preference[0], 'beer'], beer_df.loc[preference[1], 'beer'])
