@@ -25,7 +25,7 @@ first_card = dbc.Card(
             html.H5("Step 1:", className="card-title"),
             html.P("Select the Beer52 box available for tasting.")
         ]
-    ), color="light", outline=True
+    ), color="#fff", outline=True
 )
 
 second_card = dbc.Card(
@@ -36,7 +36,7 @@ second_card = dbc.Card(
                 "Have a taste of the beers presented and select your preferred beer."
             )
         ]
-    ), color="light", outline=True
+    ), color="#fff", outline=True
 )
 
 third_card = dbc.Card(
@@ -47,7 +47,7 @@ third_card = dbc.Card(
                 "View your top ranked and recommended beers to buy from the Beer52 shop."
             )
         ]
-    ), color="light", outline=True
+    ), color="#fff", outline=True
 )
 
 cards = dbc.Row([dbc.Col(first_card, md=4), dbc.Col(second_card, md=4), dbc.Col(third_card, md=4)])
