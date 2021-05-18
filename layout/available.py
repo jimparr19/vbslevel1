@@ -1,3 +1,4 @@
+import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 from config import beer_df
@@ -37,19 +38,27 @@ switches = dbc.FormGroup(
 # form = dbc.Form([radio_options, switches])
 
 available_layout = [
+    dbc.Row(html.P('Select the Beer52 beers available for tasting.')),
     dbc.Row(
         children=[
             dbc.Col(
                 children=[
                     dbc.Form([radio_options])
                 ],
-                md=6
+                md=4
             ),
             dbc.Col(
                 children=[
                     dbc.Form([switches]),
                 ],
-                md=6
+                md=4
+            ),
+            dbc.Col(
+                children=[
+                    dbc.Col(dbc.Button("Next", id="btn_to_selection", size="lg", block=True,
+                                       href="selection", disabled=True, className='beer52-btn')),
+                ],
+                md=4
             )
         ],
     ),
@@ -57,16 +66,5 @@ available_layout = [
         children=[
             dbc.Col(id="available_message", md=12)
         ]
-    ),
-    dbc.Row(
-        children=[
-            dbc.Col(
-                children=[
-                    dbc.Col(dbc.Button("Next", id="btn_to_selection", size="lg", block=True,
-                                       href="selection", disabled=True, className='beer52-btn')),
-                ],
-                md=12
-            )
-        ],
-        className='mt-3 mb-3'),
+    )
 ]

@@ -6,6 +6,7 @@ from config import beer_df
 
 def get_selection_layout(data):
     selection_layout = [
+        dbc.Row(html.P('Have a taste of the beers presented and select your preferred beer:')),
         dbc.Row(
             children=[
                 dbc.Col(

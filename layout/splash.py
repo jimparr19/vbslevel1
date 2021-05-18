@@ -23,7 +23,7 @@ first_card = dbc.Card(
     dbc.CardBody(
         [
             html.H5("Step 1:", className="card-title"),
-            html.P("Select the Beer52 box available for tasting.")
+            html.P("Select the Beer52 beers available for tasting.")
         ]
     ), color="#fff", outline=True
 )
