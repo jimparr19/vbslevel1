@@ -55,16 +55,21 @@ available_layout = [
             ),
             dbc.Col(
                 children=[
-                    dbc.Col(dbc.Button("Next", id="btn_to_selection", size="lg", block=True,
-                                       href="selection", disabled=True, className='beer52-btn')),
+                    dbc.Row(
+                        children=[
+                            dbc.Col(dbc.Button("Next", id="btn_to_selection", size="lg", block=True,
+                                               href="selection", disabled=True, className='beer52-btn'))
+                        ]
+                    ),
+                    dbc.Row(
+                        children=[
+                            dbc.Col(id="available_message", md=12)
+                        ]
+                    )
                 ],
                 md=4
             )
         ],
     ),
-    dbc.Row(
-        children=[
-            dbc.Col(id="available_message", md=12)
-        ]
-    )
+
 ]
