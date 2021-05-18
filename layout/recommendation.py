@@ -13,6 +13,10 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                 dbc.Col(
                     dash_table.DataTable(
                         id='table',
+                        style_cell={
+                            'whiteSpace': 'normal',
+                            'height': 'auto',
+                        },
                         columns=[{'id': 'beer', 'name': 'beer'},
                                  {'id': 'style', 'name': 'style'},
                                  {'id': 'utility', 'name': 'utility', 'type': 'numeric', 'format': Format(precision=2)},
@@ -46,7 +50,13 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                                 'fontWeight': 'bold',
 
                             }
-                        ]
+                        ],
+                        css=[
+                            {
+                                'selector': 'table',
+                                'rule': 'width: 100%;'
+                            }
+                        ],
                     ), md=12
                 )
             ],
@@ -60,7 +70,13 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                         id='weight',
                         columns=[{'id': col, 'name': col, 'type': 'numeric', 'format': Format(precision=2)} for col in
                                  weights_table.columns],
-                        data=weights_table.to_dict('records')
+                        data=weights_table.to_dict('records'),
+                        css=[
+                            {
+                                'selector': 'table',
+                                'rule': 'width: 100%;'
+                            }
+                        ],
                     ), md=12
                 )
             ]
