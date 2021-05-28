@@ -3,21 +3,8 @@ import numpy as np
 
 import dash_bootstrap_components as dbc
 
-from config import beer_df
 from dash.dependencies import Input, Output
 from main import app
-
-
-@app.callback(
-    Output("switches_input", "value"),
-    [
-        Input("radio_input", "value"),
-    ]
-)
-def update_available_beers(radio_value):
-    available_beers = beer_df[beer_df.issue == radio_value]['beer'].values
-    available_beers_index = [row.Index for row in beer_df.itertuples() if row.beer in available_beers]
-    return available_beers_index
 
 
 @app.callback(

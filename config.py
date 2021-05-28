@@ -11,22 +11,26 @@ THEME = dbc.themes.BOOTSTRAP
 beer_df = pd.read_pickle(os.path.join(config_path, 'beer_df_1.pickle'))
 
 # Default beers
-available_beers = beer_df[beer_df.issue_number == 59]['beer'].values
+available_beers = beer_df[beer_df.Syllabus == 'all']['Style'].values
 
-features = ['abv', 'hoppy', 'malty', 'sour', 'floral', 'fruit', 'sweet', 'smooth', 'bitter']
+available_beers = [
+    'Best Bitter',
+    'Czech Premium Pale Lager',
+    'Gueuze',
+    'German Pils',
+    'Irish Stout',
+    'Kölsch',
+    'Sweet Stout',
+    'Weissbier',
+    'Witbier',
+]
 
-beer_features_df = beer_df.loc[:, ['beer'] + features]
-beer_features_df.set_index('beer', inplace=True)
+features = ['ABVAvg', 'IBUAvg', 'SRMAvg', 'ADF(%)', 'FGAvg', 'RelativeBitterness']
 
-feature_ranges = {'abv': (beer_features_df.abv.min(), beer_features_df.abv.max()),
-                  'hoppy': (0, 5),
-                  'malty': (0, 5),
-                  'sour': (0, 5),
-                  'floral': (0, 5),
-                  'fruit': (0, 5),
-                  'sweet': (0, 5),
-                  'smooth': (0, 5),
-                  'bitter': (0, 5)}
+beer_features_df = beer_df.loc[:, ['Style'] + features]
+beer_features_df.set_index('Style', inplace=True)
+
+feature_ranges = {i: (beer_features_df[i].min(), beer_features_df[i].max()) for i in features}
 
 beer_features_min = pd.Series({key: feature_ranges[key][0] for key in features})
 beer_features_max = pd.Series({key: feature_ranges[key][1] for key in features})

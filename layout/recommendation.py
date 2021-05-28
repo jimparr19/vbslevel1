@@ -17,26 +17,25 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                             'whiteSpace': 'normal',
                             'height': 'auto',
                         },
-                        columns=[{'id': 'beer', 'name': 'beer'},
-                                 {'id': 'style', 'name': 'style'},
+                        columns=[{'id': 'Style', 'name': 'Style'},
+                                 {'id': 'Category', 'name': 'Category'},
                                  {'id': 'utility', 'name': 'utility', 'type': 'numeric', 'format': Format(precision=2)},
                                  {'id': 'tasted', 'name': 'tasted'},
-                                 {'id': 'abv', 'name': 'abv', 'type': 'numeric',
+                                 {'id': 'ABVAvg', 'name': 'ABVAvg', 'type': 'numeric',
                                   'format': FormatTemplate.percentage(1)},
-                                 {'id': 'hoppy', 'name': 'hoppy', 'type': 'numeric'},
-                                 {'id': 'malty', 'name': 'malty', 'type': 'numeric'},
-                                 {'id': 'sour', 'name': 'sour', 'type': 'numeric'},
-                                 {'id': 'floral', 'name': 'floral', 'type': 'numeric'},
-                                 {'id': 'fruit', 'name': 'fruit', 'type': 'numeric'},
-                                 {'id': 'sweet', 'name': 'sweet', 'type': 'numeric'},
-                                 {'id': 'smooth', 'name': 'smooth', 'type': 'numeric'},
-                                 {'id': 'bitter', 'name': 'bitter', 'type': 'numeric'},
-                                 {'id': 'buy', 'name': 'Beer52', 'type': 'text', 'presentation': 'markdown'}
+                                 {'id': 'IBUAvg', 'name': 'IBUAvg', 'type': 'numeric', 'format': Format(precision=2)},
+                                 {'id': 'SRMAvg', 'name': 'SRMAvg', 'type': 'numeric', 'format': Format(precision=2)},
+                                 {'id': 'ADF(%)', 'name': 'ADF(%)', 'type': 'numeric',
+                                  'format': FormatTemplate.percentage(1)},
+                                 {'id': 'FGAvg', 'name': 'FGAvg', 'type': 'numeric', 'format': Format(precision=4)},
+                                 {'id': 'RelativeBitterness', 'name': 'RelativeBitterness', 'type': 'numeric',
+                                  'format': Format(precision=2)},
+                                 {'id': 'Link', 'name': 'Link', 'type': 'text', 'presentation': 'markdown'}
                                  ],
                         data=table.to_dict('records'),
                         style_cell_conditional=[
                             {
-                                'if': {'column_id': 'beer'},
+                                'if': {'column_id': 'Style'},
                                 'textAlign': 'left',
                             },
                         ],
@@ -49,6 +48,94 @@ def get_recommendation_layout(tasted_table, table, weights_table):
                                 'backgroundColor': '#E9ECEF',
                                 'fontWeight': 'bold',
 
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} lt 4'
+                                },
+                                'backgroundColor': '#E8D77D',
+                                'color': '#E8D77D',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 4 && {SRMAvg} lt 5'
+                                },
+                                'backgroundColor': '#DCB332',
+                                'color': '#DCB332',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 5 && {SRMAvg} lt 7'
+                                },
+                                'backgroundColor': '#D6A531',
+                                'color': '#D6A531',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 7 && {SRMAvg} lt 9'
+                                },
+                                'backgroundColor': '#C98B28',
+                                'color': '#C98B28',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 9 && {SRMAvg} lt 13'
+                                },
+                                'backgroundColor': '#BC752C',
+                                'color': '#BC752C',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 13 && {SRMAvg} lt 17'
+                                },
+                                'backgroundColor': '#A85629',
+                                'color': '#A85629',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 17 && {SRMAvg} lt 22'
+                                },
+                                'backgroundColor': '#994320',
+                                'color': '#994320',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 22 && {SRMAvg} lt 27'
+                                },
+                                'backgroundColor': '#812C1E',
+                                'color': '#812C1E',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 27 && {SRMAvg} lt 34'
+                                },
+                                'backgroundColor': '#671F12',
+                                'color': '#671F12',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 34 && {SRMAvg} lt 44'
+                                },
+                                'backgroundColor': '#4D0D0F',
+                                'color': '#4D0D0F',
+                            },
+                            {
+                                'if': {
+                                    'column_id': 'SRMAvg',
+                                    'filter_query': '{SRMAvg} ge 44'
+                                },
+                                'backgroundColor': '#2C0E0F',
+                                'color': '#2C0E0F',
                             }
                         ],
                         css=[

@@ -33,8 +33,8 @@ def pbl_update(n_clicks_left, n_clicks_right, left_beer_name, right_beer_name,
     available_data = json.loads(available_data_str) if available_data_str else None
 
     # get indexes used
-    left_index = int(beer_df[beer_df.beer == left_beer_name].index.values)
-    right_index = int(beer_df[beer_df.beer == right_beer_name].index.values)
+    left_index = int(beer_df[beer_df.Style == left_beer_name].index.values)
+    right_index = int(beer_df[beer_df.Style == right_beer_name].index.values)
 
     n_clicks_left = n_clicks_left if n_clicks_left is not None else 0
     n_clicks_right = n_clicks_right if n_clicks_right is not None else 0
@@ -92,11 +92,11 @@ def update_left_beer(preference_data_str, left_image, left_card_title, left_desc
                 next_choice = np.random.choice(preference_data['not_tasted'])
             else:
                 next_choice = preference_data['not_tasted'][0]
-            return beer_df.loc[next_choice, 'img'], beer_df.loc[next_choice, 'beer'], beer_df.loc[
-                next_choice, 'style']
+            return beer_df.loc[next_choice, 'Image'], beer_df.loc[next_choice, 'Style'], beer_df.loc[
+                next_choice, 'Category']
         else:
-            return beer_df.loc[preference_data['left'], 'img'], beer_df.loc[preference_data['left'], 'beer'], \
-                   beer_df.loc[preference_data['left'], 'style']
+            return beer_df.loc[preference_data['left'], 'Image'], beer_df.loc[preference_data['left'], 'Style'], \
+                   beer_df.loc[preference_data['left'], 'Category']
     else:
         return left_image, left_card_title, left_description
 
@@ -124,12 +124,12 @@ def update_right_beer(preference_data_str, right_image, right_card_title, right_
                 next_choice = np.random.choice(preference_data['not_tasted'])
             else:
                 next_choice = preference_data['not_tasted'][0]
-            return beer_df.loc[next_choice, 'img'], beer_df.loc[next_choice, 'beer'], beer_df.loc[
-                next_choice, 'style']
+            return beer_df.loc[next_choice, 'Image'], beer_df.loc[next_choice, 'Style'], beer_df.loc[
+                next_choice, 'Category']
         else:
-            return beer_df.loc[preference_data['right'], 'img'], beer_df.loc[preference_data['right'], 'beer'], \
+            return beer_df.loc[preference_data['right'], 'Image'], beer_df.loc[preference_data['right'], 'Style'], \
                    beer_df.loc[
-                       preference_data['right'], 'style']
+                       preference_data['right'], 'Category']
     else:
         return right_image, right_card_title, right_description
 

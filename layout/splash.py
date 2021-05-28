@@ -55,7 +55,7 @@ cards = dbc.Row([dbc.Col(first_card, md=4), dbc.Col(second_card, md=4), dbc.Col(
 get_started = dbc.Row(
     children=[
         dbc.Col(
-            dbc.Button("Get started", id="btn_get_started", className="beer52-btn", size="lg", block=True, href="available")),
+            dbc.Button("Get started", id="btn_get_started", className="beer-btn", size="lg", block=True, href="available")),
     ],
     className='mt-3 mb-3'
 )

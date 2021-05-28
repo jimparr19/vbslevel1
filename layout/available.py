@@ -1,32 +1,17 @@
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-from config import beer_df
+from config import beer_df, available_beers
 
-box_options = [{"label": box, "value": box} for box in beer_df.issue.unique()]
-
-beer_options = [{"label": beer.beer, "value": beer.Index} for beer in beer_df.itertuples()]
-default_box = beer_df.issue.unique()[0]
-
-radio_options = dbc.FormGroup(
-    children=[
-        dbc.Label("Beer52 box:"),
-        dbc.RadioItems(
-            options=box_options,
-            value=default_box,
-            id="radio_input",
-            persistence=True,
-            persistence_type='session'
-        ),
-    ],
-)
+beer_options = [{"label": beer.Style, "value": beer.Index} for beer in beer_df.itertuples()]
+available_beers_index = [row.Index for row in beer_df.itertuples() if row.Style in available_beers]
 
 switches = dbc.FormGroup(
     children=[
         dbc.Label("Available beers for tasting:"),
         dbc.Checklist(
             options=beer_options,
-            value=[],
+            value=available_beers_index,
             id="switches_input",
             switch=True,
             persistence=True,
@@ -35,30 +20,23 @@ switches = dbc.FormGroup(
     ],
 )
 
-# form = dbc.Form([radio_options, switches])
 
 available_layout = [
-    dbc.Row(html.P('Select the Beer52 beers available for tasting.')),
+    dbc.Row(html.P('Select the beer styles available for tasting.')),
     dbc.Row(
         children=[
             dbc.Col(
                 children=[
-                    dbc.Form([radio_options])
-                ],
-                md=4
-            ),
-            dbc.Col(
-                children=[
                     dbc.Form([switches]),
                 ],
-                md=4
+                md=6
             ),
             dbc.Col(
                 children=[
                     dbc.Row(
                         children=[
                             dbc.Col(dbc.Button("Next", id="btn_to_selection", size="lg", block=True,
-                                               href="selection", disabled=True, className='beer52-btn'))
+                                               href="selection", disabled=True, className='beer-btn'))
                         ]
                     ),
                     dbc.Row(
@@ -67,7 +45,7 @@ available_layout = [
                         ]
                     )
                 ],
-                md=4
+                md=6
             )
         ],
     ),

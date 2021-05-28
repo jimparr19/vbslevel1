@@ -9,8 +9,8 @@ def get_beer_df():
 
 
 def clean_data(df):
-    df['img'] = df['img'].apply(lambda x: '/assets/beers/' + x)
-    df['buy'] = df['buy'].apply(lambda x: '[shop](' + x + ')')
+    df = df[df['Syllabus'] == 'all'].reset_index()
+    df['Link'] = df['Link'].apply(lambda x: '[VBS](' + x + ')')
     return pd.DataFrame.copy(df, deep=True)
 
 

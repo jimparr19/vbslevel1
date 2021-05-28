@@ -2,7 +2,7 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-logo_image = '/assets/img/logo.svg'
+logo_image = '/assets/img/ml4b.png'
 
 preference_data = {'preferences': [], 'tasted': []}
 

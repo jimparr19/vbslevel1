@@ -15,7 +15,7 @@ def get_selection_layout(data):
                             children=[
                                 dbc.CardImg(
                                     id='left_image',
-                                    src=beer_df.loc[data['start_left'], 'img'],
+                                    src=beer_df.loc[data['start_left'], 'Image'],
                                     className='selection_img',
                                     top=True,
                                 ),
@@ -26,10 +26,10 @@ def get_selection_layout(data):
                                             id='left_button',
                                             children="Select",
                                             block=True,
-                                            className='beer52-btn mb-3'),
-                                        html.H4(beer_df.loc[data['start_left'], 'beer'], id='left_card_title',
+                                            className='beer-btn mb-3'),
+                                        html.H4(beer_df.loc[data['start_left'], 'Style'], id='left_card_title',
                                                 className="card-title"),
-                                        html.P(beer_df.loc[data['start_left'], 'style'], id='left_description',
+                                        html.P(beer_df.loc[data['start_left'], 'Category'], id='left_description',
                                                className="card-text"),
 
                                     ]
@@ -45,7 +45,7 @@ def get_selection_layout(data):
                             children=[
                                 dbc.CardImg(
                                     id='right_image',
-                                    src=beer_df.loc[data['start_right'], 'img'],
+                                    src=beer_df.loc[data['start_right'], 'Image'],
                                     className='selection_img',
                                     top=True,
                                 ),
@@ -56,10 +56,10 @@ def get_selection_layout(data):
                                             id='right_button',
                                             children="Select",
                                             block=True,
-                                            className='beer52-btn mb-3'),
-                                        html.H4(beer_df.loc[data['start_right'], 'beer'], id='right_card_title',
+                                            className='beer-btn mb-3'),
+                                        html.H4(beer_df.loc[data['start_right'], 'Style'], id='right_card_title',
                                                 className="card-title"),
-                                        html.P(beer_df.loc[data['start_right'], 'style'], id='right_description',
+                                        html.P(beer_df.loc[data['start_right'], 'Category'], id='right_description',
                                                className="card-text"),
 
                                     ]
@@ -80,7 +80,7 @@ def get_selection_layout(data):
                     children=[
                         dbc.Col(dbc.Button("Next",
                                            id="btn_to_recommendation",
-                                           className='beer52-btn',
+                                           className='beer-btn',
                                            size="lg",
                                            block=True,
                                            disabled=True,

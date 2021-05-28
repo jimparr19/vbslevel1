@@ -40,18 +40,18 @@ def display_page(pathname, data_str, preference_data_str):  # noqa
     elif pathname == '/selection':
         return get_selection_layout(data)
     elif pathname == '/recommendation':
-        available_beers_df = beer_df.loc[data['available'], ['beer'] + features]
-        available_beers_df.set_index('beer', inplace=True)
+        available_beers_df = beer_df.loc[data['available'], ['Style'] + features]
+        available_beers_df.set_index('Style', inplace=True)
         normalised_available_beers_df = (available_beers_df - beer_features_min) / (
                 beer_features_max - beer_features_min)
         model = BayesPreference(data=normalised_available_beers_df, normalise=False)
         model.set_priors([Normal() for _ in features])
         for preference in preference_data['preferences']:
-            model.add_strict_preference(beer_df.loc[preference[0], 'beer'], beer_df.loc[preference[1], 'beer'])
+            model.add_strict_preference(beer_df.loc[preference[0], 'Style'], beer_df.loc[preference[1], 'Style'])
         model.infer_weights()
         # table for tasted beers
         tasted_table = model.rank()
-        tasted_table['beer'] = tasted_table.index.values
+        tasted_table['Style'] = tasted_table.index.values
 
         # table for all beers
         normalised_all_beers_df = (beer_features_df - beer_features_min) / (
@@ -59,20 +59,17 @@ def display_page(pathname, data_str, preference_data_str):  # noqa
         utilities = [model.weights.dot(row.values) for i, row in normalised_all_beers_df.iterrows()]
         rank_df = pd.DataFrame(utilities, index=normalised_all_beers_df.index.values, columns=['utility'])
         table = rank_df.sort_values(by='utility', ascending=False)
-        table['beer'] = table.index.values
-        table['style'] = beer_df.set_index('beer').loc[table.index, 'style'].values
-        table['abv'] = beer_features_df.loc[table.index, 'abv'].div(100).values
-        table['hoppy'] = beer_features_df.loc[table.index, 'hoppy'].values
-        table['malty'] = beer_features_df.loc[table.index, 'malty'].values
-        table['sour'] = beer_features_df.loc[table.index, 'sour'].values
-        table['floral'] = beer_features_df.loc[table.index, 'floral'].values
-        table['fruit'] = beer_features_df.loc[table.index, 'fruit'].values
-        table['sweet'] = beer_features_df.loc[table.index, 'sweet'].values
-        table['smooth'] = beer_features_df.loc[table.index, 'smooth'].values
-        table['bitter'] = beer_features_df.loc[table.index, 'bitter'].values
+        table['Style'] = table.index.values
+        table['Category'] = beer_df.set_index('Style').loc[table.index, 'Category'].values
+        table['ABVAvg'] = beer_features_df.loc[table.index, 'ABVAvg'].div(100).values
+        table['IBUAvg'] = beer_features_df.loc[table.index, 'IBUAvg'].values
+        table['SRMAvg'] = beer_features_df.loc[table.index, 'SRMAvg'].values
+        table['ADF(%)'] = beer_features_df.loc[table.index, 'ADF(%)'].values
+        table['FGAvg'] = beer_features_df.loc[table.index, 'FGAvg'].values
+        table['RelativeBitterness'] = beer_features_df.loc[table.index, 'RelativeBitterness'].values
         table['tasted'] = ["yes" if (beer in tasted_table.index) else "no" for beer in table.index]
-        table['buy'] = beer_df.set_index('beer').loc[table.index, 'buy'].values
-        cols = ['beer', 'style', 'utility', 'tasted', 'abv', 'hoppy', 'malty', 'sour', 'floral', 'fruit', 'sweet', 'smooth', 'bitter', 'buy']
+        table['Link'] = beer_df.set_index('Style').loc[table.index, 'Link'].values
+        cols = ['Style', 'Category', 'utility', 'tasted', 'ABVAvg', 'IBUAvg', 'SRMAvg', 'ADF(%)', 'FGAvg', 'RelativeBitterness', 'Link']
         table = table[cols]
         weights_table = pd.DataFrame({col: [weight] for col, weight in zip(model.data.columns, model.weights)})
         return get_recommendation_layout(tasted_table, table, weights_table)
