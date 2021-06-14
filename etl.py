@@ -10,7 +10,7 @@ def get_beer_df():
 
 def clean_data(df):
     df = df[df['Syllabus'] == 'all'].reset_index()
-    df['Link'] = df['Link'].apply(lambda x: '[VBS](' + x + ')')
+    # df['Link'] = df['Link'].apply(lambda x: '[VBS](' + x + ')')
     return pd.DataFrame.copy(df, deep=True)
 
 

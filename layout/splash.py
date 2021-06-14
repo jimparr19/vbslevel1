@@ -1,63 +1,34 @@
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-jumbotron = dbc.Jumbotron(
-    children=[
-        html.H1("BeerPBL", className="display-3", style={"text-align": "center"}),
-        html.P(
-            "Beer Preference Based Learning",
-            className="lead",
-            style={"text-align": "center"}
-        ),
-        html.Hr(className="my-2"),
-        html.P(
-            "Get personalised beer recommendations using preference based learning and paired taste tests.",
-            style={"text-align": "center"}
-        ),
-    ],
-    fluid=True,
-    className="splash-jumbotron"
-)
+from config import beer_df, srm_color
 
-first_card = dbc.Card(
-    dbc.CardBody(
-        [
-            html.H5("Step 1:", className="card-title"),
-            html.P("Select the Beer52 beers available for tasting.")
-        ]
-    ), color="#fff", outline=True
-)
 
-second_card = dbc.Card(
-    dbc.CardBody(
-        [
-            html.H5("Step 2:", className="card-title"),
-            html.P(
-                "Have a taste of the beers presented and select your preferred beer."
+def beer_card(style, category, srm):
+    card = dbc.Card(
+        children=[
+            dbc.CardBody(
+                [
+                    html.A(
+                        href=f'/{style.strip().lower().replace(" ", "")}',
+                        children=[
+                            html.H5(style, className="card-title"),
+                            html.P(category, className="card-text")
+                        ]
+                    )
+                ]
             )
-        ]
-    ), color="#fff", outline=True
-)
+        ],
+        style={'background-color': srm_color(srm)},
+        inverse=False if srm < 10 else True,
+    )
+    return card
 
-third_card = dbc.Card(
-    dbc.CardBody(
-        [
-            html.H5("Step 3:", className="card-title"),
-            html.P(
-                "View your top ranked and recommended beers to buy from the Beer52 shop."
-            )
-        ]
-    ), color="#fff", outline=True
-)
 
-cards = dbc.Row([dbc.Col(first_card, md=4), dbc.Col(second_card, md=4), dbc.Col(third_card, md=4)])
+cards = [beer_card(row.Style, row.Category, row.SRMAvg) for row in beer_df.sort_values(by='SRMAvg').itertuples()]
 
-get_started = dbc.Row(
-    children=[
-        dbc.Col(
-            dbc.Button("Get started", id="btn_get_started", className="beer-btn", size="lg", block=True, href="available")),
-    ],
-    className='mt-3 mb-3'
-)
-
-splash_layout = [jumbotron, cards, get_started]
+splash_layout = [
+    dbc.CardColumns(
+        cards
+    )
+]

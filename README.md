@@ -1,10 +1,6 @@
-# beerpbl
+# vbs level 1
 
-**beerpbl** is a web application for learning individual preferences for beer through pairwise comparisons.
-
-This has been developed using data collected through the beer52 website and Ferment magazine.
- 
-This is based on the [pypbl](https://github.com/jimparr19/pypbl) library to infer individual preferences.
+Learning resources for the cicerone level 1 beer server exam
 
 ## Acknowledgments
-[Beer52](https://www.beer52.com/) and [Ferment magazine](https://www.beer52.com/ferment)
+[Beer with Nat](https://discoveringbeer.co.uk/beer-styles/)
