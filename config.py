@@ -9,7 +9,6 @@ THEME = dbc.themes.BOOTSTRAP
 
 # Data
 beer_df = pd.read_pickle(os.path.join(config_path, 'beer_df_1.pickle'))
-beer_df['strip_style'] = beer_df['Style'].apply(lambda x: x.strip().lower().replace(" ", ""))
 
 # Default beers
 available_beers = beer_df[beer_df.Syllabus == 'all']['Style'].values

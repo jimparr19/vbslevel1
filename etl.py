@@ -10,6 +10,10 @@ def get_beer_df():
 
 def clean_data(df):
     df = df[df['Syllabus'] == 'all'].reset_index()
+    df['img'] = df['Example Image'].apply(lambda x: f'/assets/beers/{x}.jpeg')
+    df['safe_name'] = df['Style'].apply(
+        lambda x: x.strip().lower().replace(" ", "").replace("ä", "a").replace("ö", "o"))
+
     # df['Link'] = df['Link'].apply(lambda x: '[VBS](' + x + ')')
     return pd.DataFrame.copy(df, deep=True)
 
