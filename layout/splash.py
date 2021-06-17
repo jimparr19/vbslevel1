@@ -20,7 +20,7 @@ def beer_card(style, safe_name, category, srm):
             )
         ],
         style={'background-color': srm_color(srm)},
-        inverse=False if srm < 10 else True,
+        inverse=False if srm < 13 else True,
     )
     return card
 

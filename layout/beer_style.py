@@ -24,7 +24,7 @@ def beer_style_layout(style):
                                             dbc.ListGroupItem(
                                                 f'C - {beer["SRM Descriptor"].values[0]} (SRM {beer.SRMLow.values[0]} - {beer.SRMHigh.values[0]})',
                                                 style={'background-color': srm_color(beer.SRMAvg.values[0]),
-                                                       'color': '#212529' if beer.SRMAvg.values[0] < 10 else '#FFF'}),
+                                                       'color': '#212529' if beer.SRMAvg.values[0] < 13 else '#FFF'}),
                                             dbc.ListGroupItem(
                                                 f'ABV - {beer["ABV Descriptor"].values[0]} ({beer.ABVLow.values[0]}% - {beer.ABVHigh.values[0]}%)'),
 

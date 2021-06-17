@@ -18,6 +18,7 @@ from config import beer_df
 app.layout = main_layout
 server = app.server
 
+
 # update page based on url
 @app.callback(
     Output('page_content', 'children'),
@@ -37,22 +38,12 @@ def display_page(pathname, data_str, preference_data_str):  # noqa
 
 # update navbar items based on page
 @app.callback(
-    Output('nav-items', 'children'),
-    [Input('url', 'pathname')])
-def change_navbar(pathname):  # noqa
-    if pathname == '/':
-        return []
-    elif pathname == '/available':
-        navbar_items = [
-            dbc.Col(dbc.NavLink("Available", id='available-link', href="available", className='nav_link active')),
-            dbc.Col(dbc.NavLink("Selection", id='selection-link', href="selection", className='nav_link')),
-            dbc.Col(
-                dbc.NavLink("Recommendation", id='recommendation-link', href="recommendation", className='nav_link')
-            ),
-        ]
-    else:
-        navbar_items = []
-    return navbar_items
+    Output('shuffle-link', 'href'),
+    [Input('url', 'pathname')],
+    [State('shuffle-link', 'href')])
+def change_shuffle_link(pathname, previous_link):  # noqa
+    href = beer_df[beer_df['safe_name'] != previous_link].sample()['safe_name'].values[0]
+    return href
 
 
 # add callback for toggling the collapse on small screens

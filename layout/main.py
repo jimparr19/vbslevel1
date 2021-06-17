@@ -7,7 +7,9 @@ logo_image = '/assets/img/ml4b.png'
 preference_data = {'preferences': [], 'tasted': []}
 
 nav_links = dbc.Row(
-    children=[],
+    children=[
+            dbc.Col(dbc.NavLink("Shuffle", id='shuffle-link', href="#", className='nav_link')),
+    ],
     id='nav-items',
     no_gutters=True,
     className="ml-auto flex-nowrap mt-3 mt-md-0",
